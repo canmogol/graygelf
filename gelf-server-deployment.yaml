@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gelf-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gelf-server
+  template:
+    metadata:
+      labels:
+        app: gelf-server
+    spec:
+      containers:
+        - name: gelf-server
+          imagePullPolicy: Always
+          image: canmogol/gelf-server:0.0.1
+          ports:
+            - containerPort: 12201
+              protocol: UDP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gelf-server-service
+spec:
+  selector:
+    app: gelf-server
+  ports:
+    - name: 12201udp
+      port: 12201
+      targetPort: 12201
+      protocol: UDP
+  type: ClusterIP
+---
