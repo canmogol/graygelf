@@ -16,23 +16,26 @@ server.on('message', function (gelf) {
         if (gelf.level === 3) {
             console.log(
                 '[\x1b[32m' + gelf._hostname + '\x1b[0m]' +
-                '[\x1b[33m' + gelf._application + '\x1b[0m]]' +
-                '[\x1b[34m' + LOG_LEVELS[gelf.level] + '\x1b[0m]]' +
-                '[\x1b[35m' + gelf._thread_name + '\x1b[0m]]' +
-                '[\x1b[36m' + gelf._logger_name + '\x1b[0m]]' +
-                '[\x1b[32m' + gelf._root_cause_class_name + '\x1b[0m]]' +
-                '[\x1b[34m' + gelf._source_class_name + ':' +
+                '[\x1b[33m' + gelf._application + '\x1b[0m]' +
+                '[\x1b[31m' + LOG_LEVELS[gelf.level] + '\x1b[0m]' +
+                '[\x1b[35m' + gelf._thread_name + '\x1b[0m]' +
+                '[\x1b[36m' + gelf._logger_name + '\x1b[0m]' +
+                '[\x1b[31m' + gelf._root_cause_class_name + '\x1b[0m]' +
+                '[\x1b[32m' + gelf._source_class_name + ':' +
                 '' + gelf._source_method_name + ':' +
-                '' + gelf._source_line_number + '\x1b[0m]]' +
+                '' + gelf._source_line_number + '\x1b[0m]' +
                 ': ' + gelf.full_message
             )
         } else {
             console.log(
                 '[\x1b[32m' + gelf._hostname + '\x1b[0m]' +
-                '[\x1b[33m' + gelf._application + '\x1b[0m]]' +
-                '[\x1b[34m' + LOG_LEVELS[gelf.level] + '\x1b[0m]]' +
-                '[\x1b[35m' + gelf._thread_name + '\x1b[0m]]' +
-                '[\x1b[36m' + gelf._logger_name + '\x1b[0m]]' +
+                '[\x1b[33m' + gelf._application + '\x1b[0m]' +
+                '[\x1b[34m' + LOG_LEVELS[gelf.level] + '\x1b[0m]' +
+                '[\x1b[35m' + gelf._thread_name + '\x1b[0m]' +
+                '[\x1b[36m' + gelf._logger_name + '\x1b[0m]' +
+                '[\x1b[32m' + gelf._source_class_name + ':' +
+                '' + gelf._source_method_name + ':' +
+                '' + gelf._source_line_number + '\x1b[0m]' +
                 ': ' + gelf.full_message
             )
         }
