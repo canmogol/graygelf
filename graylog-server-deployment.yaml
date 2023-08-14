@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graylog-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: graylog-server
+  template:
+    metadata:
+      labels:
+        app: graylog-server
+    spec:
+      containers:
+        - name: graylog-server
+          imagePullPolicy: Always
+          image: canmogol/graylog-server:0.0.1
+          ports:
+            - containerPort: 12201
+              protocol: UDP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: graylog-service
+spec:
+  selector:
+    app: graylog-server
+  ports:
+    - name: 12201udp
+      port: 12201
+      targetPort: 12201
+      protocol: UDP
+  type: ClusterIP
+---
